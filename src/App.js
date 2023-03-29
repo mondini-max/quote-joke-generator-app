@@ -1,37 +1,36 @@
 import './App.css';
-import { Helmet } from 'react-helmet';
-import { FaQuoteLeft, FaTwitter } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
 
-function App() {
+import Jokes from './Components/Jokes';
+import Quotes from './Components/Quotes';
+
+const App = () => {
+  const [route, setRoute] = useState('home');
+  const onRouteChange = (route) => {
+    setRoute(route);
+  };
   return (
     <div className='quote-container' id='quote-container'>
-      <Helmet>
-        <meta charSet='utf-8' />
-        <title>Quote generator</title>
-      </Helmet>
-      {/* quote */}
-      <div className='quote-text'>
-        <FaQuoteLeft size='3rem' />
-        <span id='quote'>
-          {' '}
-          Before we get too depressed about the state of our politics, let's
-          remember our history. The great debates of the past, all stirred great
-          passions.
-        </span>
-      </div>
-      {/* Author */}
-      <div className='quote-author'>
-        <span id='author'>John Doe</span>
-      </div>
-      {/* buttons */}
-      <div className='buttons-container'>
-        <button className='twitter-button' id='twitter' title='Tweet This !'>
-          <FaTwitter size='1rem' />
-        </button>
-        <button id='new-quote'>New Quote</button>
-      </div>
+      {route === 'home' ? (
+        <>
+          <h1>Random quote and joke generator</h1>
+          {/* buttons */}
+          <div className='buttons-container'>
+            <button onClick={() => onRouteChange('quotes')} id='new-quote'>
+              Quote
+            </button>
+            <button onClick={() => onRouteChange('joke')} id='new-quote'>
+              Joke
+            </button>
+          </div>
+        </>
+      ) : route === 'quotes' ? (
+        <Quotes onRouteChange={onRouteChange} />
+      ) : route === 'joke' ? (
+        <Jokes onRouteChange={onRouteChange} />
+      ) : null}
     </div>
   );
-}
+};
 
 export default App;
