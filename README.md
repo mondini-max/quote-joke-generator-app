@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Random quote and joke generator with Create React App
 
 [DEMO](https://mondini-max.github.io/quote-joke-generator-app/).
 
