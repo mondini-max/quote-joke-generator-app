@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/quote-joke-generator-app/static/css/main.95408642.css",
+    "main.js": "/quote-joke-generator-app/static/js/main.832f40ae.js",
+    "static/js/787.9dbe7971.chunk.js": "/quote-joke-generator-app/static/js/787.9dbe7971.chunk.js",
+    "index.html": "/quote-joke-generator-app/index.html",
+    "main.95408642.css.map": "/quote-joke-generator-app/static/css/main.95408642.css.map",
+    "main.832f40ae.js.map": "/quote-joke-generator-app/static/js/main.832f40ae.js.map",
+    "787.9dbe7971.chunk.js.map": "/quote-joke-generator-app/static/js/787.9dbe7971.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.95408642.css",
+    "static/js/main.832f40ae.js"
+  ]
+}
