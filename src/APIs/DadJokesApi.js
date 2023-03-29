@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const DAD_JOKE_BASE_URL = 'https://icanhazdadjoke.com';
 
-export default axios.create({
+const DAD_JOKES_AXIOS = axios.create({
   baseURL: DAD_JOKE_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
@@ -10,3 +10,5 @@ export default axios.create({
     // 'User-Agent': 'axios/0.19.0',
   },
 });
+
+export default DAD_JOKES_AXIOS;

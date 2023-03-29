@@ -1,35 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaQuoteLeft, FaTwitter, FaHome } from 'react-icons/fa';
-import axios from 'axios';
+import QUOTES_AXIOS from '../APIs/QuotesApi';
+import useAxios from '../Hooks/useAxios';
 
 const Quotes = ({ onRouteChange }) => {
-  const [quotes, setQuotes] = useState([]);
   const [singleQuote, setSingleQuote] = useState({});
-  const apiUrl = 'https://type.fit/api/quotes';
+  const [counter, setCounter] = useState(0);
 
-  useEffect(() => {
-    try {
-      axios.get(apiUrl).then((response) => {
-        // handle success
-        setQuotes(response?.data);
-        console.log(response, quotes);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-  // console.log(quotes);
-  const newQuotes = () => {
-    setSingleQuote(quotes[Math.floor(Math.random() * quotes.length)]);
-    // const quote = quotes[Math.floor(Math.random() * quotes.length)];
-    console.log(singleQuote);
+  const [quotes, error, loading] = useAxios({
+    axiosInstance: QUOTES_AXIOS,
+    method: 'GET',
+    url: '/',
+    requestConfig: {
+      header: {
+        'Content-Language': 'en-US',
+      },
+    },
+  });
+
+  const quoteHandler = () => {
+    setSingleQuote(quotes[Math.floor(Math.random() * (quotes.length / 2))]);
   };
 
-  if (singleQuote.length === 0) {
-    newQuotes();
-  }
+  const message =
+    typeof singleQuote == 'object' && Object.entries(singleQuote).length === 0
+      ? 'object is empty'
+      : 'object is not empty';
+
   return (
-    <div>
+    <article>
       {/* quote */}
 
       <FaHome
@@ -37,30 +36,47 @@ const Quotes = ({ onRouteChange }) => {
         style={{ color: 'blue', fontSize: '2rem' }}
         title='Home'
       />
-
-      <div className='quote-text'>
-        <FaQuoteLeft size='3rem' />
-        <span id='quote'>
-          {' '}
-          Before we get too depressed about the state of our politics, let's
-          remember our history. The great debates of the past, all stirred great
-          passions.
-        </span>
-      </div>
-      {/* Author */}
-      <div className='quote-author'>
-        <span id='author'>John Doe</span>
-      </div>
-      {/* buttons */}
-      <div className='buttons-container'>
-        <button className='twitter-button' id='twitter' title='Tweet This !'>
-          <FaTwitter />
-        </button>
-        <button onClick={newQuotes} id='new-quote'>
-          New Quote
-        </button>
-      </div>
-    </div>
+      {loading && <p>Loading...</p>}
+      {/* {!loading && error && <p className='errMsg'>{error}</p>} */}
+      {!loading && quotes && (
+        <>
+          <div className='quote-text'>
+            <FaQuoteLeft size='3rem' />
+            <span id='quote'>
+              {' '}
+              {message === 'object is empty'
+                ? 'Courage is going from failure to failure without losing enthusiasm.'
+                : singleQuote?.text}
+            </span>
+          </div>
+          {/* Author */}
+          <div className='quote-author'>
+            <span id='author'>
+              {' '}
+              {message === 'object is empty'
+                ? 'Winston Churchill'
+                : singleQuote?.author}
+            </span>
+          </div>
+          {/* buttons */}
+          <div className='buttons-container'>
+            <button
+              className='twitter-button'
+              id='twitter'
+              title='Tweet This !'
+            >
+              <FaTwitter />
+            </button>
+            <button onClick={quoteHandler} id='new-quote'>
+              New Quote
+            </button>
+          </div>
+        </>
+      )}
+      {!loading && !error && quotes && !singleQuote && (
+        <p>No dad Joke to display</p>
+      )}
+    </article>
   );
 };
 

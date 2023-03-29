@@ -1,6 +1,5 @@
-import './App.css';
 import React, { useState, useEffect } from 'react';
-
+import './App.css';
 import Jokes from './Components/Jokes';
 import Quotes from './Components/Quotes';
 
@@ -9,6 +8,7 @@ const App = () => {
   const onRouteChange = (route) => {
     setRoute(route);
   };
+
   return (
     <div className='quote-container' id='quote-container'>
       {route === 'home' ? (

@@ -1,11 +1,11 @@
 import React from 'react';
 import { FaRegLaughBeam, FaTwitter, FaHome } from 'react-icons/fa';
 import useAxios from '../Hooks/useAxios';
-import axios from '../APIs/dadJokes';
+import DAD_JOKES_AXIOS from '../APIs/DadJokesApi';
 
 const Jokes = ({ onRouteChange }) => {
   const [joke, error, loading, reFetchData] = useAxios({
-    axiosInstance: axios,
+    axiosInstance: DAD_JOKES_AXIOS,
     method: 'GET',
     url: '/',
     requestConfig: {
