@@ -61,7 +61,7 @@ button:active {
 @media screen and (max-width: 1000px) {
   .quote-container {
     margin: auto 10px;
-    max-width: 70vw;
+    max-width: 100%;
   }
   .quote-text {
     font-size: 1.4rem;
