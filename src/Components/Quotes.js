@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaQuoteLeft, FaTwitter, FaHome } from 'react-icons/fa';
 import QUOTES_AXIOS from '../APIs/QuotesApi';
+import tweetQuote from '../Hooks/tweetQuote';
 import useAxios from '../Hooks/useAxios';
 
 const Quotes = ({ onRouteChange }) => {
@@ -44,33 +45,42 @@ const Quotes = ({ onRouteChange }) => {
             <FaQuoteLeft size='3rem' />
             <span id='quote'>
               {' '}
-              {message === 'object is empty'
-                ? 'Courage is going from failure to failure without losing enthusiasm.'
-                : singleQuote?.text}
+              {message === 'object is empty' ? (
+                <button onClick={quoteHandler} id='new-quote'>
+                  I'm Feeling Lucky, Click here to get your today quote
+                </button>
+              ) : (
+                singleQuote?.text
+              )}
             </span>
           </div>
           {/* Author */}
           <div className='quote-author'>
             <span id='author'>
               {' '}
-              {message === 'object is empty'
-                ? 'Winston Churchill'
-                : singleQuote?.author}
+              {message === 'object is empty' ? '' : singleQuote?.author}
             </span>
           </div>
           {/* buttons */}
-          <div className='buttons-container'>
-            <button
-              className='twitter-button'
-              id='twitter'
-              title='Tweet This !'
-            >
-              <FaTwitter />
-            </button>
-            <button onClick={quoteHandler} id='new-quote'>
-              New Quote
-            </button>
-          </div>
+          {message === 'object is empty' ? (
+            singleQuote?.author
+          ) : (
+            <div className='buttons-container'>
+              <button
+                className='twitter-button'
+                id='twitter'
+                title='Tweet This !'
+                onClick={() =>
+                  tweetQuote(singleQuote?.text, singleQuote?.author)
+                }
+              >
+                <FaTwitter />
+              </button>
+              <button onClick={quoteHandler} id='new-quote'>
+                New Quote
+              </button>
+            </div>
+          )}
         </>
       )}
       {!loading && !error && quotes && !singleQuote && (

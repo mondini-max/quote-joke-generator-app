@@ -2,6 +2,7 @@ import React from 'react';
 import { FaRegLaughBeam, FaTwitter, FaHome } from 'react-icons/fa';
 import useAxios from '../Hooks/useAxios';
 import DAD_JOKES_AXIOS from '../APIs/DadJokesApi';
+import tweetQuote from '../Hooks/tweetQuote';
 
 const Jokes = ({ onRouteChange }) => {
   const [joke, error, loading, reFetchData] = useAxios({
@@ -40,6 +41,7 @@ const Jokes = ({ onRouteChange }) => {
               className='twitter-button'
               id='twitter'
               title='Tweet This !'
+              onClick={() => tweetQuote(joke?.joke)}
             >
               <FaTwitter />
             </button>
