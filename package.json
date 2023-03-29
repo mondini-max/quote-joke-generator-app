@@ -1,7 +1,8 @@
 {
-  "name": "quote-generator-app",
+  "name": "quote-joke-generator-app",
   "version": "0.1.0",
   "private": true,
+  "author": "Maxime Mondini @2023",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
